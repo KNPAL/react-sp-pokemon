@@ -1,4 +1,8 @@
-.container{
-  padding-left: 3rem;
-  padding-right: 3rem;
+
+body>#root>div{
+  height: 100vh;
+}
+
+.app-bg-color{
+  background-color: #deeded;
 }

@@ -1,9 +1,10 @@
-function ApplicationHeader() {
+function ApplicationHeader(props) {
     return (
         <div className='py-3'>
-            <h4> Pokedex</h4>
-            <p>Search for any pokemon that exists on the planet</p>
-        </div>);
+             <label className='px-3'>{props.title}</label>|
+             <label className='px-3'>{props.description}</label>
+        </div>
+        );
 }
 
 export default ApplicationHeader; 

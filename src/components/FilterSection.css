@@ -7,3 +7,7 @@
     border: initial;
     box-shadow: none;
 }
+
+.fc-height{
+  height: 3rem;
+}

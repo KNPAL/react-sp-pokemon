@@ -1,11 +1,12 @@
 .card {
      height: 18rem !important; 
+     background-image: linear-gradient(#FCC1B0,#D7C2D7);
 }
 
 
 .img-size {
     width: 60%;
-    height: 100%;
+    height: 70%;
 }
 
 .card-border {

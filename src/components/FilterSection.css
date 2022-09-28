@@ -1,0 +1,9 @@
+.filter-label{
+  color:#5e5f7e;
+}
+
+.control-bg-color,.control-bg-color:focus {
+    background-color: #c9dee1;   
+    border: initial;
+    box-shadow: none;
+}

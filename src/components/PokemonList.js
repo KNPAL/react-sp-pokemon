@@ -1,5 +1,5 @@
 
-import Card from './Card';
+import Card from './UI/Card';
 import { useEffect, useState } from 'react';
 
 function PokemonList() {
@@ -36,7 +36,7 @@ function PokemonList() {
     }, []);
 
     return (
-        <div>
+        <>
             {!isLoading && <div className='row m-0 py-3'>
                 {pokemonList?.map((props, key) => (
                     <div className='col-md-2 p-3'>
@@ -47,8 +47,8 @@ function PokemonList() {
                 ))}
             </div>}
             {!error && isLoading && <p>Loading...</p>}
-        </div>
+        </>
     )
 }
 
-export default PokemonList
+export default PokemonList;

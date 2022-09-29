@@ -1,10 +1,10 @@
-const Appstring = {
+export const Appstring = {
     title: 'Pokedex',
     description: 'Search for any Pokemon that exists on the planet'
-}
+};
 
 
-const AppColor = {
+export const AppColor = {
     Normal: '#DDCBD0',
     Fighting: '#FCC1B0',
     Flying: '#B2D2E8',
@@ -25,7 +25,4 @@ const AppColor = {
     Unknown: '#C0DFDD',
     Ice: '#C7D7DF',
     Shadow: '#CACACA'
-}
-
-
-export default { AppColor, Appstring };
+};

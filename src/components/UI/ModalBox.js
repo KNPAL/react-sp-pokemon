@@ -1,5 +1,6 @@
 import './ModalBox.css';
 import React, { useEffect, useState } from 'react';
+import { firstWordCapital, formateId, commaSepratedArrayValue } from '../../utiles/utils';
 
 
 function ModalBox(props) {
@@ -12,7 +13,7 @@ function ModalBox(props) {
         const hasTypes = types?.types;
         if (!!hasTypes?.length) {
             hasTypes.forEach(element => {
-                type.push(element.type.name);
+                type.push(firstWordCapital(element.type.name));
             });
         }
         return type;
@@ -23,7 +24,7 @@ function ModalBox(props) {
         const hasAblities = ablitiesArray?.abilities;
         if (!!hasAblities?.length) {
             hasAblities.forEach(element => {
-                ablities.push(element.ability.name);
+                ablities.push(firstWordCapital(element.ability.name));
             });
         }
         return ablities;
@@ -34,7 +35,7 @@ function ModalBox(props) {
         const haseggGroup = eggGroupArray?.egg_groups;
         if (!!haseggGroup?.length) {
             haseggGroup.forEach(element => {
-                eggGroup.push(element.name);
+                eggGroup.push(firstWordCapital(element.name));
             });
         }
         return eggGroup;
@@ -73,11 +74,9 @@ function ModalBox(props) {
         fetchPokemon();
     }, []);
 
-    //#endregion
-
     return (
         <>
-
+            {/* background-image: linear-gradient(#FCC1B0,#D7C2D7); */}
             <div className='backdrop'>
                 <div className="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" >
                     <div className="modal-dialog modal-lg">
@@ -85,22 +84,27 @@ function ModalBox(props) {
                             <div className="modal-body">
                                 <div className='container h-100'>
                                     <div className='row m-0 h-50'>
-                                        <div className='col-md-4'>
-                                            <div className='border border-dark h-100 w-100'>
-                                                <img src={getImageUrl(props.id)} className="card-img-top img-size" alt="..." />
+                                        <div className='col-md-4 p-4'>
+                                            <div className=' h-100 py-4 w-100 '>
+                                                <div style={{ borderRadius: '15px', borderStyle: 'dashed', borderColor: 'black' }} className='h-100 w-100 justify-content-center align-items-center d-flex'>
+                                                    <img style={{ width: '80%', height: '70%' }} src={getImageUrl(props.id)} className="card-img-top" alt="..." />
+
+                                                </div>
                                             </div>
                                         </div>
                                         <div className='col-md-8'>
-                                            <label className='m-3'>
-                                                {pokemon.name}
-                                            </label>
-                                            <div className='vr'></div>
-                                            <label className='m-3'>
-                                                {pokemon.id}
-                                            </label>
-                                            <div className='vr'></div>
-                                            <button onClick={props.onModalClose} className='m-3 btn btn-outline-primary'>close</button>
-                                            <div className='col-md-12 border h-75'>
+                                            <div className='d-flex'>
+                                                <div className='col-md-4 my-2 justify-content-center align-items-center d-flex border-end'>
+                                                    <label className='m-3'>   {firstWordCapital(pokemon.name).toUpperCase()}   </label>
+                                                </div>
+                                                <div className='col-md-4 my-2 justify-content-center align-items-center d-flex border-end'>
+                                                    <label className='m-3'> {formateId(pokemon.id)}</label>
+                                                </div>
+                                                <div className='col-md-4 justify-content-center align-items-center d-flex'>
+                                                    <button onClick={props.onModalClose} className='m-3 btn btn-outline-primary'>close</button>
+                                                </div>
+                                            </div>
+                                            <div className='col-md-12 p-2 h-75'>
                                                 {getDescription(pokemon).substring(0, 500)}
                                             </div>
                                         </div>
@@ -109,14 +113,18 @@ function ModalBox(props) {
                                         <div className='col-md-3'>
                                             height
                                             <div>
-                                                {pokemon.height}
+                                                <span>
+                                                    {parseInt(((pokemon.height / 30.48) * 10))}'
+                                                    {parseInt((((pokemon.height / 30.48) * 10) % 1).toFixed(2).substring(2))}''
+                                                </span>
+
                                             </div>
 
                                         </div>
                                         <div className='col-md-3'>
                                             weight
                                             <div>
-                                                {pokemon.weight}
+                                                {pokemon.weight / 10} kg
                                             </div>
 
                                         </div>
@@ -126,13 +134,13 @@ function ModalBox(props) {
                                         <div className='col-md-3'>
                                             egg grops
                                             <div>
-                                                {getEggGroups(pokemon)}
+                                                {commaSepratedArrayValue(getEggGroups(pokemon))}
                                             </div>
                                         </div>
                                         <div className='col-md-3'>
                                             ablities
                                             <div>
-                                                {getAblities(pokemon)}
+                                                {commaSepratedArrayValue(getAblities(pokemon))}
                                             </div>
 
                                         </div>

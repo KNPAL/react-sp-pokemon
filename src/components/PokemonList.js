@@ -1,6 +1,7 @@
 
 import Card from './UI/Card';
 import { useEffect, useState } from 'react';
+import { firstWordCapital } from './../utiles/utils';
 
 function PokemonList() {
 
@@ -43,7 +44,7 @@ function PokemonList() {
                     <div className='col-md-2 col-6 p-3'>
                         <Card
                             img={props.imgUrl}
-                            name={props.name} id={props.id} />
+                            name={firstWordCapital(props.name)} id={props.id} />
                     </div>
                 ))}
             </div>}

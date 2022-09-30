@@ -39,7 +39,7 @@ function PokemonList() {
         <>
             {!isLoading && <div className='row m-0 py-3'>
                 {pokemonList?.map((props, key) => (
-                    <div className='col-md-2 p-3'>
+                    <div className='col-md-2 col-6 p-3'>
                         <Card
                             img={props.imgUrl}
                             name={props.name} id={props.id} />

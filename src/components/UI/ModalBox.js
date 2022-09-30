@@ -5,77 +5,142 @@ import React, { useEffect, useState } from 'react';
 function ModalBox(props) {
 
     //#region api need to filter
-    const [pokemon, setPokemon] = useState({});
+    const [pokemon, setPokemons] = useState({});
 
-    async function getPokemon() {
-        try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.id}`);
-            const data = await response.json();
-            // pokemon = data;
-            setPokemon(data);
-            console.log(data);
-
-            const response1 = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${props.id}`);
-            const data1 = await response1.json();
-            console.log(data1);
-        } catch (err) {
-            console.log(err)
+    const getTypes = (types) => {
+        let type = [];
+        const hasTypes = types?.types;
+        if (!!hasTypes?.length) {
+            hasTypes.forEach(element => {
+                type.push(element.type.name);
+            });
         }
+        return type;
+    };
+
+    const getAblities = (ablitiesArray) => {
+        let ablities = [];
+        const hasAblities = ablitiesArray?.abilities;
+        if (!!hasAblities?.length) {
+            hasAblities.forEach(element => {
+                ablities.push(element.ability.name);
+            });
+        }
+        return ablities;
+    };
+
+    const getEggGroups = (eggGroupArray) => {
+        let eggGroup = [];
+        const haseggGroup = eggGroupArray?.egg_groups;
+        if (!!haseggGroup?.length) {
+            haseggGroup.forEach(element => {
+                eggGroup.push(element.name);
+            });
+        }
+        return eggGroup;
+    };
+
+    const getDescription = (descriptionArray) => {
+        let description = '';
+        const hasDescription = descriptionArray?.flavor_text_entries;
+        if (!!hasDescription?.length) {
+            const filterResult = hasDescription.filter(word => (word.language.name === 'en'));
+            filterResult.forEach(element => {
+                if (description.indexOf(element.flavor_text) < 0) {
+                    description += element.flavor_text;
+                }
+            });
+        }
+        return description;
+    };
+
+    const getImageUrl = (id) => {
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`
+
     }
 
     useEffect(() => {
-        getPokemon()
+        const fetchPokemon = async () => {
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.id}`);
+            const data = await res.json();
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${props.id}`);
+            const descriptionData = await response.json();
+            const dataSet = { ...data, ...descriptionData };
+            setPokemons(dataSet);
+            console.log(dataSet);
+        }
+
+        fetchPokemon();
     }, []);
 
     //#endregion
 
     return (
         <>
+
             <div className='backdrop'>
                 <div className="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" >
                     <div className="modal-dialog modal-lg">
-                        <div className="modal-content h-100">
+                        <div className="modal-content modal-bg h-100">
                             <div className="modal-body">
                                 <div className='container h-100'>
                                     <div className='row m-0 h-50'>
                                         <div className='col-md-4'>
                                             <div className='border border-dark h-100 w-100'>
-
+                                                <img src={getImageUrl(props.id)} className="card-img-top img-size" alt="..." />
                                             </div>
                                         </div>
                                         <div className='col-md-8'>
                                             <label className='m-3'>
-                                                {props.name}
+                                                {pokemon.name}
                                             </label>
                                             <div className='vr'></div>
                                             <label className='m-3'>
-                                                {props.id}
+                                                {pokemon.id}
                                             </label>
                                             <div className='vr'></div>
                                             <button onClick={props.onModalClose} className='m-3 btn btn-outline-primary'>close</button>
                                             <div className='col-md-12 border h-75'>
-                                                afafa
+                                                {getDescription(pokemon).substring(0, 500)}
                                             </div>
                                         </div>
                                     </div>
                                     <div className='row m-0 h-25'>
                                         <div className='col-md-3'>
                                             height
+                                            <div>
+                                                {pokemon.height}
+                                            </div>
+
                                         </div>
                                         <div className='col-md-3'>
                                             weight
+                                            <div>
+                                                {pokemon.weight}
+                                            </div>
+
                                         </div>
                                         <div className='col-md-3'>
                                             genders
                                         </div>
                                         <div className='col-md-3'>
                                             egg grops
+                                            <div>
+                                                {getEggGroups(pokemon)}
+                                            </div>
                                         </div>
                                         <div className='col-md-3'>
                                             ablities
+                                            <div>
+                                                {getAblities(pokemon)}
+                                            </div>
+
                                         </div>
                                         <div className='col-md-3'>
                                             types
+                                            <div>
+                                                {getTypes(pokemon)}
+                                            </div>
                                         </div>
                                         <div className='col-md-3'>
                                             weak against

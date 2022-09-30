@@ -12,6 +12,10 @@
     display: block;
   }
 
+.modal-bg{
+  background-color: #deeded;
+}
+
 .modal-dialog{
   height: 50rem;
 }

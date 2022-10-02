@@ -1,7 +1,7 @@
 
 import Card from './UI/Card';
 import { useEffect, useState } from 'react';
-import { firstWordCapital } from './../utiles/utils';
+import { firstWordCapital, getImageUrl } from './../utiles/utils';
 
 function PokemonList() {
 
@@ -19,10 +19,11 @@ function PokemonList() {
                 throw new Error('Something went woung')
             }
             const transformList = data.results.map((item) => {
+                const id = item.url.substring(34, item.url.lastIndexOf('/'));
                 return {
                     name: item.name,
-                    id: item.url.substring(34, item.url.lastIndexOf('/')),
-                    imgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${item.url.substring(34, item.url.lastIndexOf('/'))}.svg`
+                    id: id,
+                    imgUrl: getImageUrl(id)
                 }
             });
             setPokemons(transformList);

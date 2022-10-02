@@ -1,4 +1,5 @@
 
+import {AppColor} from './Constants';
 export const firstWordCapital = (input) => {
     if(!!input){
         if (input.length === 0) return input;
@@ -35,6 +36,28 @@ export const commaSepratedArrayValue = (inputArray) => {
     });
     return returnStr.substring(0, returnStr.lastIndexOf(', '));
 };
+
+export const getImageUrl = (id) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+}
+
+export const getBackground = (typeArray) => {
+    let count = 0;
+    let colorList = '';
+    for (var key of Object.keys(AppColor)) {
+        if (typeArray.indexOf(key) > -1) {
+            count++;
+            colorList += AppColor[key] + ',';
+        }
+    }
+    if (count > 1) {
+        return `linear-gradient(${colorList.slice(0, colorList.lastIndexOf(','))})`;
+    } else {
+        return colorList.slice(0, colorList.lastIndexOf(','));
+    }
+
+}
+
 
 
 

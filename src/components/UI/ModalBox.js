@@ -1,7 +1,7 @@
 import './ModalBox.css';
 import React, { useEffect, useState } from 'react';
-import { firstWordCapital, formateId, commaSepratedArrayValue } from '../../utiles/utils';
-import { Appstring, AppColor } from './../../utiles/Constants';
+import { firstWordCapital, formateId, commaSepratedArrayValue,getImageUrl,getBackground } from '../../utiles/utils';
+import { Appstring } from './../../utiles/Constants';
 
 
 
@@ -57,28 +57,6 @@ function ModalBox(props) {
         return description;
     };
 
-    const getImageUrl = (id) => {
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`
-
-    }
-
-    const getBackground = (typeArray) => {
-        let count = 0;
-        let colorList = '';
-        for (var key of Object.keys(AppColor)) {
-            if (typeArray.indexOf(key) > -1) {
-                count++;
-                colorList += AppColor[key] + ',';
-            }
-        }
-        if (count > 1) {
-            return `linear-gradient(${colorList.slice(0, colorList.lastIndexOf(','))})`;
-        } else {
-            return colorList.slice(0, colorList.lastIndexOf(','));
-        }
-
-    }
-
     useEffect(() => {
         const fetchPokemon = async () => {
             const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.id}`);
@@ -87,7 +65,6 @@ function ModalBox(props) {
             const descriptionData = await response.json();
             const dataSet = { ...data, ...descriptionData };
             setPokemons(dataSet);
-            console.log(dataSet);
         }
 
         fetchPokemon();
@@ -181,7 +158,6 @@ function ModalBox(props) {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

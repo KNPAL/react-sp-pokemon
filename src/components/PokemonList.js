@@ -40,7 +40,7 @@ function PokemonList() {
     return (
         <>
             {!isLoading && <div className='row m-0 py-3'>
-                {pokemonList?.map((props, key) => (
+                {pokemonList?.map((props) => (
                     <div className='col-md-2 col-6 p-3'>
                         <Card
                             img={props.imgUrl}

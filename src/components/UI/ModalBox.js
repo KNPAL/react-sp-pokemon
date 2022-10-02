@@ -1,6 +1,6 @@
 import './ModalBox.css';
 import React, { useEffect, useState } from 'react';
-import { firstWordCapital, formateId, commaSepratedArrayValue,getImageUrl,getBackground } from '../../utiles/utils';
+import { firstWordCapital, formateId, commaSepratedArrayValue, getImageUrl, getBackground } from '../../utiles/utils';
 import { Appstring } from './../../utiles/Constants';
 
 
@@ -81,7 +81,7 @@ function ModalBox(props) {
                                     <div className='row m-0 h-50'>
                                         <div className='col-md-4 p-4'>
                                             <div className=' h-100 py-4 w-100 '>
-                                                <div style={{  borderRadius: '15px', borderStyle: 'dashed', borderColor: 'black', background: getBackground(getTypes(pokemon)) }} className='h-100 w-100 justify-content-center align-items-center d-flex'>
+                                                <div style={{ borderRadius: '15px', borderStyle: 'dashed', borderColor: 'black', background: getBackground(getTypes(pokemon)) }} className='h-100 w-100 justify-content-center align-items-center d-flex'>
                                                     <img style={{ width: '80%', height: '70%' }} src={getImageUrl(props.id)} className="card-img-top" alt="..." />
 
                                                 </div>
@@ -106,7 +106,7 @@ function ModalBox(props) {
                                     </div>
                                     <div className='row m-0 h-25'>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.height}</label>
+                                            <label className='fw-bold my-2'>{Appstring.height}</label>
                                             <div>
                                                 <span>
                                                     {parseInt(((pokemon.height / 30.48) * 10))}'
@@ -117,40 +117,42 @@ function ModalBox(props) {
 
                                         </div>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.weight}</label>
+                                            <label className='fw-bold my-2'>{Appstring.weight}</label>
                                             <div>
                                                 {pokemon.weight / 10} kg
                                             </div>
 
                                         </div>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.gender}</label>
+                                            <label className='fw-bold my-2'>{Appstring.gender}</label>
                                         </div>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.egg_Groups}</label>
+                                            <label className='fw-bold my-2'>{Appstring.egg_Groups}</label>
                                             <div>
                                                 {commaSepratedArrayValue(getEggGroups(pokemon))}
                                             </div>
                                         </div>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.abilities}</label>
+                                            <label className='fw-bold my-2'>{Appstring.abilities}</label>
                                             <div>
                                                 {commaSepratedArrayValue(getAblities(pokemon))}
                                             </div>
 
                                         </div>
                                         <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.types}</label>
+                                            <label className='fw-bold my-2'>{Appstring.types}</label>
                                             <div>
-                                                {getTypes(pokemon)}
+                                                    {getTypes(pokemon)?.map((props) => (
+                                                        <span style={{ background: getBackground(props) }} className='p-1 border border-dark rounded m-1'  >{props}</span>
+                                                    ))}
                                             </div>
                                         </div>
-                                        <div className='col-md-3'>
-                                            <label className='fw-bold'>{Appstring.weak_agains}</label>
+                                        <div className='col-md-6'>
+                                            <label className='fw-bold my-2'>{Appstring.weak_agains}</label>
                                         </div>
                                     </div>
                                     <div className='row m-0 h-25'>
-                                        <label className='fw-bold'>{Appstring.stats}</label>
+                                        <label className='fw-bold mx-2'>{Appstring.stats}</label>
                                     </div>
                                 </div>
                             </div>

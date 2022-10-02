@@ -1,7 +1,7 @@
 import './ModalBox.css';
 import React, { useEffect, useState } from 'react';
 import { firstWordCapital, formateId, commaSepratedArrayValue } from '../../utiles/utils';
-import { Appstring } from './../../utiles/Constants';
+import { Appstring, AppColor } from './../../utiles/Constants';
 
 
 
@@ -62,6 +62,23 @@ function ModalBox(props) {
 
     }
 
+    const getBackground = (typeArray) => {
+        let count = 0;
+        let colorList = '';
+        for (var key of Object.keys(AppColor)) {
+            if (typeArray.indexOf(key) > -1) {
+                count++;
+                colorList += AppColor[key] + ',';
+            }
+        }
+        if (count > 1) {
+            return `linear-gradient(${colorList.slice(0, colorList.lastIndexOf(','))})`;
+        } else {
+            return colorList.slice(0, colorList.lastIndexOf(','));
+        }
+
+    }
+
     useEffect(() => {
         const fetchPokemon = async () => {
             const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.id}`);
@@ -78,7 +95,6 @@ function ModalBox(props) {
 
     return (
         <>
-            {/* background-image: linear-gradient(#FCC1B0,#D7C2D7); */}
             <div className='backdrop'>
                 <div className="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" >
                     <div className="modal-dialog modal-lg">
@@ -88,7 +104,7 @@ function ModalBox(props) {
                                     <div className='row m-0 h-50'>
                                         <div className='col-md-4 p-4'>
                                             <div className=' h-100 py-4 w-100 '>
-                                                <div style={{ borderRadius: '15px', borderStyle: 'dashed', borderColor: 'black' }} className='h-100 w-100 justify-content-center align-items-center d-flex'>
+                                                <div style={{  borderRadius: '15px', borderStyle: 'dashed', borderColor: 'black', background: getBackground(getTypes(pokemon)) }} className='h-100 w-100 justify-content-center align-items-center d-flex'>
                                                     <img style={{ width: '80%', height: '70%' }} src={getImageUrl(props.id)} className="card-img-top" alt="..." />
 
                                                 </div>
@@ -160,7 +176,6 @@ function ModalBox(props) {
                                         <label className='fw-bold'>{Appstring.stats}</label>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -22,7 +22,6 @@ function PokemonList() {
                 return {
                     name: item.name,
                     id: item.url.substring(34, item.url.lastIndexOf('/')),
-                    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png
                     imgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${item.url.substring(34, item.url.lastIndexOf('/'))}.svg`
                 }
             });

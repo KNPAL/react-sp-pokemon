@@ -1,6 +1,8 @@
 import './ModalBox.css';
 import React, { useEffect, useState } from 'react';
 import { firstWordCapital, formateId, commaSepratedArrayValue } from '../../utiles/utils';
+import { Appstring } from './../../utiles/Constants';
+
 
 
 function ModalBox(props) {
@@ -95,13 +97,13 @@ function ModalBox(props) {
                                         <div className='col-md-8'>
                                             <div className='d-flex'>
                                                 <div className='col-md-4 my-2 justify-content-center align-items-center d-flex border-end'>
-                                                    <label className='m-3'>   {firstWordCapital(pokemon.name).toUpperCase()}   </label>
+                                                    <label className='m-3 fw-bold'>   {firstWordCapital(pokemon.name).toUpperCase()}   </label>
                                                 </div>
                                                 <div className='col-md-4 my-2 justify-content-center align-items-center d-flex border-end'>
                                                     <label className='m-3'> {formateId(pokemon.id)}</label>
                                                 </div>
                                                 <div className='col-md-4 justify-content-center align-items-center d-flex'>
-                                                    <button onClick={props.onModalClose} className='m-3 btn btn-outline-primary'>close</button>
+                                                    <button onClick={props.onModalClose} type='button' aria-label="Close" className='btn-close border border-dark fs-small rounded-circle'></button>
                                                 </div>
                                             </div>
                                             <div className='col-md-12 p-2 h-75'>
@@ -111,7 +113,7 @@ function ModalBox(props) {
                                     </div>
                                     <div className='row m-0 h-25'>
                                         <div className='col-md-3'>
-                                            height
+                                            <label className='fw-bold'>{Appstring.height}</label>
                                             <div>
                                                 <span>
                                                     {parseInt(((pokemon.height / 30.48) * 10))}'
@@ -122,40 +124,40 @@ function ModalBox(props) {
 
                                         </div>
                                         <div className='col-md-3'>
-                                            weight
+                                            <label className='fw-bold'>{Appstring.weight}</label>
                                             <div>
                                                 {pokemon.weight / 10} kg
                                             </div>
 
                                         </div>
                                         <div className='col-md-3'>
-                                            genders
+                                            <label className='fw-bold'>{Appstring.gender}</label>
                                         </div>
                                         <div className='col-md-3'>
-                                            egg grops
+                                            <label className='fw-bold'>{Appstring.egg_Groups}</label>
                                             <div>
                                                 {commaSepratedArrayValue(getEggGroups(pokemon))}
                                             </div>
                                         </div>
                                         <div className='col-md-3'>
-                                            ablities
+                                            <label className='fw-bold'>{Appstring.abilities}</label>
                                             <div>
                                                 {commaSepratedArrayValue(getAblities(pokemon))}
                                             </div>
 
                                         </div>
                                         <div className='col-md-3'>
-                                            types
+                                            <label className='fw-bold'>{Appstring.types}</label>
                                             <div>
                                                 {getTypes(pokemon)}
                                             </div>
                                         </div>
                                         <div className='col-md-3'>
-                                            weak against
+                                            <label className='fw-bold'>{Appstring.weak_agains}</label>
                                         </div>
                                     </div>
                                     <div className='row m-0 h-25'>
-                                        stats
+                                        <label className='fw-bold'>{Appstring.stats}</label>
                                     </div>
                                 </div>
 

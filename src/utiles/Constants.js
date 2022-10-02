@@ -1,6 +1,16 @@
 export const Appstring = {
     title: 'Pokedex',
-    description: 'Search for any Pokemon that exists on the planet'
+    description: 'Search for any Pokemon that exists on the planet',
+    height: 'Height',
+    weight:'Weight',
+    gender:'Gender(s)',
+    egg_Groups:'Egg Groups',
+    abilities:'Abilities',
+    types:'Types',
+    weak_agains:'Weak Against',
+    stats:'Stats',
+    
+    
 };
 
 

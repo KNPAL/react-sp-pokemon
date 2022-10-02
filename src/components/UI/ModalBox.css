@@ -19,6 +19,7 @@
 .modal-dialog{
   height: 50rem;
 }
+
   
   @media (min-width: 768px) {
     .modal {
